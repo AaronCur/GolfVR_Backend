@@ -1,0 +1,121 @@
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title> Firebase Web Quickstart</title>
+  <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <style media="screen">
+    body {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    #uploader {
+
+      -webkit-appearance: none;
+      appearance: none;
+      width: 50%;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h3>Upload File</h3>
+  <progress value="0" max="100" id="uploader">0%</progress>
+  <input type="file" value="upload" id="fileButton" />
+  <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    //  var config = {
+    //    apiKey: "AIzaSyDH1VbfPmsLp1070XW8ioBb4kYGQWtsgzI",
+    //  authDomain: "golfbackend-wss.firebaseapp.com",
+    //  databaseURL: "https://golfbackend-wss.firebaseio.com",
+    //  projectId: "golfbackend-wss",
+    //storageBucket: "golfbackend-wss.appspot.com",
+    //  messagingSenderId: "624043849669"
+    //  };
+    var config = {
+      apiKey: "AIzaSyAeDiJAzk65_JymrgMddLe2AawPqyxu9LM",
+      authDomain: "fir-web-login-f0757.firebaseapp.com",
+      databaseURL: "https://fir-web-login-f0757.firebaseio.com",
+      projectId: "fir-web-login-f0757",
+      storageBucket: "gs://fir-web-login-f0757.appspot.com",
+      messagingSenderId: "688440892792"
+    };
+    firebase.initializeApp(config);
+
+    // Get elements
+    var uploader = document.getElementById('uploader')
+    var fileButton = document.getElementById('fileButton')
+
+    //Listen for file selection]
+    fileButton.addEventListener('change', function(e) {
+      // get file
+      var file = e.target.files[0];
+
+      console.log(file.type.substring(0, 5));
+
+      var course = 'Baltinglass';
+      var hole = '10';
+      var section = 'Green';
+      var fileType = file.type.substring(0, 5);
+      //Create a storage ref
+      var storageRefImage = firebase.storage().ref(course + '/' + hole + '/' + section + '/' + 'Image/' + file.name);
+      var storageRefAudio = firebase.storage().ref(course + '/' + hole + '/' + section + '/' + 'Audio/' + file.name);
+
+      //Create a
+
+      //Upload File
+      if (fileType == 'image') {
+        var task = storageRefImage.put(file);
+
+      } else if (fileType == 'audio') {
+        var task = storageRefAudio.put(file);
+      } else {
+        window.alert("File type not supported");
+        return;
+      }
+
+      //Update progress bar
+      task.on('state_changed',
+        function progress(snapshot) {
+          var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          uploader.value = percentage;
+          console.log(uploader.value);
+        },
+
+        function error(err) {
+          window.alert("You need to Log In to upload a file");
+        },
+
+        function complete() {
+          window.alert("upload Complete!");
+          uploader.value = 0;
+          task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+            console.log('File available at', downloadURL);
+            var downloadLink = downloadURL;
+            var postKey = firebase.database().ref('Posts/').push().key;
+            console.log(downloadURL);
+            var updates = {};
+            var postData = {
+              url: downloadLink
+            };
+            updates['/' + course + '/' + '/' + hole + '/' + '/' + section + '/' + fileType] = postData;
+            firebase.database().ref().update(updates);
+          });
+
+        });
+    });
+  </script>
+</body>
+
+</html>

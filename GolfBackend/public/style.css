@@ -19,9 +19,34 @@ input, button{
   display: none;
 }
 
+.reg-header-div{
+  width: 50%;
+  margin: -50px auto;
+  margin-top: 0px;
+  margin-left: 0px auto;
+  padding: 10px;
+}
 
+.reg-name-div, .reg-holes-div{
+  position: relative;
+  width: 50%;
+  margin: -50px auto;
+  margin-top: 0px;
+  margin-left: 0px auto;
+  padding: 20px;
+}
 
-.main-div input {
+.reg-submit-div{
+  position: fixed;
+  margin: -50px auto;
+  margin-top: 20px;
+  left: 50%;
+  right: 50%;
+  padding: 20px;
+  transform: translate(100%, 0%);
+}
+
+.main-div input, .reg-name-div input {
   display: block;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -35,11 +60,11 @@ input, button{
   -moz-transition:0.3s;
 }
 
-.main-div input:focus{
+.main-div input:focus, .reg-name-div input:focus{
   border:1px solid #777;
 }
 
-.main-div button, .loggedin-div button {
+.main-div button, .loggedin-div button, .reg-submit-div button {
   background: #5d8ffc;
   color: #fff;
   border: 1px solid #5d8ffc;
@@ -52,7 +77,13 @@ input, button{
   -moz-transition:0.3s;
 }
 
-.main-div button:hover, .loggedin-div button:hover {
+.reg-submit-div {
+    position: absolute;
+    left: 9%;
+    width: 100px;
+}
+
+.main-div button:hover, .loggedin-div button:hover, .reg-submit-div button:hover{
   background: #fff;
   color: #5d8ffc;
   border: 1px solid #5d8ffc;

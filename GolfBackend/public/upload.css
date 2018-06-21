@@ -21,9 +21,11 @@ input, button{
   margin: -0px;
   font-family: 'Nunito', sans-serif;
   font-size: 16px;
+  text-align: left;
 }
 
-.upload-body button{
+.upload-body button, .upload-div button{
+  text-align: center;
   background: #5d8ffc;
   color: #fff;
   border: 1px solid #5d8ffc;
@@ -36,7 +38,7 @@ input, button{
   -moz-transition:0.3s;
 }
 
-.upload-body button:hover{
+.upload-body button:hover, .upload-div button:hover{
   background: #fff;
   color: #5d8ffc;
   border: 1px solid #5d8ffc;
@@ -70,10 +72,15 @@ input, button{
   border: 1px solid #5d8ffc;
   cursor: pointer;
 }
+.align-center
+{
+    text-align: center;
+}
 
 #uploader {
   -webkit-appearance: none;
   appearance: none;
-  width: 50%;
+  width: 200%;
+  margin-left: -125px;
   margin-bottom: 10px;
 }

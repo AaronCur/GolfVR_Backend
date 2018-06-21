@@ -65,25 +65,16 @@
   <br>
   <br>
 
-
-
-
-
   <body id="upload_body" class="upload-body">
-
-    <progress value="0" max="100" id="uploader">0%</progress>
-    <input type="file" value="upload" id="fileButton" />
-
+    <div id="upload_div" class="upload-div">
+      <div class="align-center">
+        <h3>Upload an Image/Audio file</h3>
+      </div>
+      <progress value="0" max="100" id="uploader">0%</progress>
+      <input type="file" value="upload" id="fileButton" />
+    </div>
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
     <script>
-      //var config = {
-      //  apiKey: "AIzaSyDH1VbfPmsLp1070XW8ioBb4kYGQWtsgzI",
-      //  authDomain: "golfbackend-wss.firebaseapp.com",
-      //  databaseURL: "https://golfbackend-wss.firebaseio.com",
-      //  projectId: "golfbackend-wss",
-      //  storageBucket: "golfbackend-wss.appspot.com",
-      //  messagingSenderId: "624043849669"
-      //};
       // Initialize Firebase
       var config = {
         apiKey: "AIzaSyAeDiJAzk65_JymrgMddLe2AawPqyxu9LM",
@@ -93,7 +84,9 @@
         storageBucket: "gs://fir-web-login-f0757.appspot.com",
         messagingSenderId: "688440892792"
       };
+
       firebase.initializeApp(config);
+
 
       // Get elements
       var uploader = document.getElementById('uploader');
@@ -108,6 +101,7 @@
 
         var course = getCourse();
         var hole = document.getElementById('holes').value;
+        var lastHole = document.getElementById('holes');
         var section = document.getElementById('section').value;
         var fileType = file.type.substring(0, 5);
         //Create a storage ref
@@ -148,15 +142,15 @@
               var postKey = firebase.database().ref('Posts/').push().key;
               console.log(downloadURL);
               var updates = {};
+              var maxHole = {};
               var postData = {
                 url: downloadLink
               };
               updates['/' + course + '/' + '/' + hole + '/' + '/' + section + '/' + fileType] = postData;
               firebase.database().ref().update(updates);
               window.alert("upload Complete!");
+              hideProgressDiv();
             });
-
-
           });
       });
     </script>

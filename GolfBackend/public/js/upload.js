@@ -6,6 +6,10 @@ function hide()
   document.getElementById("upload_div").style.display = "none";
 
 }
+function revealProgressDiv()
+{
+  document.getElementById("upload_bar_div").style.display = "block";
+}
 function hideProgressDiv()
 {
   document.getElementById('fileButton').value = "";

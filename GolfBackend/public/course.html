@@ -8,27 +8,27 @@
 
 <body>
 
-  <div id="reg_header_div" class="reg-header-div">
-    <h1> Register your course </h1>
-  </div>
+  <div class="card-div">
+    <div id="reg_header_div">
+      <h1> Register your course </h1>
+    </div>
 
-  <div id="reg_name_div" class="reg-name-div">
-    <h3>Enter the name of your Golf Course</h3>
-    <input type="courseName" onchange="check(JSON.parse(localStorage.getItem('name')))" placeholder="e.g. Carlow Golf Course" id="course_name_field" />
-  </div>
+    <div id="reg_name_div">
+      <h3>Enter the name of your Golf Course</h3>
+      <input type="courseName" onchange="check(JSON.parse(localStorage.getItem('name')))" placeholder="e.g. Carlow Golf Course" id="course_name_field" />
+    </div>
 
-
-
-  <div id="reg_holes_div" class="reg-holes-div">
-    <h3>Enter the number of holes on your Golf Course</h3>
-    <select id="holes">
-    <option value="9">9</option>
-    <option value="18" selected>18</option>
-  </select>
-  </div>
-
-  <div id="reg_submit_div" class="reg-submit-div">
-    <button onclick="reg(); submit(); ">Submit</button></a>
+    <div id="reg_holes_div">
+      <h3>Enter the number of holes on your Golf Course</h3>
+      <select id="holes">
+        <option value="9">9</option>
+        <option value="18" selected>18</option>
+      </select>
+      <br>
+    </div>
+    <div id="reg_submit_div">
+      <button onclick="reg(); submit(); ">Submit</button></a>
+    </div>
   </div>
 
   <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>

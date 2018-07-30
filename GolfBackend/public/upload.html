@@ -19,7 +19,7 @@
 
     <div id="nine_holes_div" class="align-center">
       <h3>Select a hole</h3>
-      <select id="holes">
+      <select id="9holes">
     <option value="1" selected>1</option>
     <option value="2">2</option>
     <option value="3">3</option>
@@ -35,7 +35,7 @@
 
     <div id="holes_div" class="align-center">
       <h3>Select a hole</h3>
-      <select id="holes">
+      <select id="18holes">
     <option value="1" selected>1</option>
     <option value="2">2</option>
     <option value="3">3</option>
@@ -104,8 +104,11 @@
           console.log(file.type.substring(0, 5));
 
           var course = getCourse();
-          var hole = document.getElementById('holes').value;
-          var lastHole = document.getElementById('holes');
+          if (document.getElementById("nine_holes_div").style.display == "none") {
+            var hole = document.getElementById('18holes').value;
+          } else {
+            var hole = document.getElementById('9holes').value;
+          }
           var section = document.getElementById('section').value;
           var fileType = file.type.substring(0, 5);
           //Create a storage ref
